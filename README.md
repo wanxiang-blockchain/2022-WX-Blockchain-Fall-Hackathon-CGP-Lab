@@ -4,12 +4,12 @@
 
 ```bash
 .
-└── py-etherscan-api    # 以太坊区块扫描器(连接 etherscan.io 的api)
+├── cgp               # 前端,生成同态密文的公私钥与加解密
+├── py-etherscan-api  # 以太坊区块扫描器(连接 etherscan.io 的api)
+└── Web3.CGP          # 后端服务,其中的NFT铸造中间件用到了ipfs的nft.storage
 ```
 
-## 前端密文计算SDK的用法
-
-### **使用**
+## cgp - 前端密文计算的用法
 
 ```js
 // 引用库
@@ -38,4 +38,43 @@ heManager.heEncryption(plain, pubkey).then(cipher => {
 heManager.heDecryption(cipher, seckey, pubkey).then(plain => {
       console.log(plain)
     })
+```
+
+## Web3.CGP - CGP的后端服务
+
+### NFT铸造中间件
+
+这是一个 上传NFT元数据 并 铸造NFT 的中间件
+
+#### 在NFT.Storage上上传nft的元数据文件
+`Web3.CGP/app/scripts/upload.js`
+
+```js
+function MakeStorageClient() {
+  // console.log(GetAccessToken() )
+  return new NFTStorage.NFTStorage({ token: GetAccessToken() });
+}
+
+async function StoreContent(image, name, description) {
+  console.log("Uploading files to IPFS with nft.storage....");
+  const client = MakeStorageClient();
+  const result = await client.store({
+    image,
+    name,
+    description,
+  });
+  console.log("Stored files with result:", result);
+  return result;
+}
+```
+
+![image-20220916215557576](res/image-20220916215557576.png)
+
+#### 在链上铸造NFT
+`Web3.CGP/app/scripts/main.js`
+
+```bash
+curl -F 'file=@/mnt/d/Downloads/newnew/icon.jpg' http://127.0.0.1:17171/mint  
+
+{"code":100,"msg":"铸造成功"}
 ```

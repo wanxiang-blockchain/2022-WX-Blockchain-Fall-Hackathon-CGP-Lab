@@ -7,6 +7,7 @@ let session = require('express-session')
 const app = express()
 let mainRouter = require('./app/scripts/main');
 let uploadRouter = require('./app/scripts/upload');
+let mintRouter = require('./app/scripts/mint');
 
 // 设置页面的跳转还有session的设置
 app.use(session({ 	secret: '123456', // 加密key 可以随意书写
@@ -32,6 +33,7 @@ app.use(bodyParser.json())
 
 app.use('/', mainRouter);
 app.use('/upload', uploadRouter);
+app.use('/mint', mintRouter);
 
 
 const port = 17171;

@@ -71,12 +71,10 @@ router.post('/', async function(req, res, next) {
   };
   await uploadMeta()
 
-  //TODO:铸造nft
-
   res.send({
     code: 100, //error: 0
     data: req.files,
-    msg: '铸造成功'
+    msg: '上传成功'
   })
 
 });
