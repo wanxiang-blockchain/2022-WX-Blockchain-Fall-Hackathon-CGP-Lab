@@ -5,7 +5,7 @@
 ```bash
 .
 ├── cgp               # 前端,生成同态密文的公私钥与加解密
-├── py-etherscan-api  # 以太坊区块扫描器(连接 etherscan.io 的api)
+├── tool_etherscan    # 以太坊区块扫描器(使用 etherscan.io 的api)
 └── Web3.CGP          # 后端服务,包括api,合约,NFT铸造中间件(用到了ipfs的nft.storage)
 ```
 
@@ -94,4 +94,33 @@ async function StoreContent(image, name, description) {
 curl -F 'file=@/mnt/d/Downloads/newnew/icon.jpg' http://127.0.0.1:17171/mint  
 
 {"code":100,"msg":"铸造成功"}
+```
+
+## tool_etherscan 以太坊区块扫描器
+
+```bash
+#*Api-Key Token*
+PKSVMJ95S7ZA63NGM5KM6K7FT1N3J737RH
+
+#查询余额
+#Get Ether Balance for a single Address
+curl https://api.etherscan.io/api?module=account&action=balance&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&tag=latest&apikey=PKSVMJ95S7ZA63NGM5KM6K7FT1N3J737RH
+
+
+### ERC20 Token
+#指定接收方
+http://api.etherscan.io/api?module=account&action=tokentx&address=0x5416f85b40342B751830C03486843A1E2f8F774c&startblock=0&endblock=999999999&sort=asc&apikey=PKSVMJ95S7ZA63NGM5KM6K7FT1N3J737RH
+
+#指定Token合约地址
+https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2&address=0x4e83362442b8d1bec281594cea3050c8eb01311c&page=1&offset=100&sort=asc&apikey=PKSVMJ95S7ZA63NGM5KM6K7FT1N3J737RH
+
+#指定接收方和Token合约地址
+https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2&address=0x4e83362442b8d1bec281594cea3050c8eb01311c&page=1&offset=100&sort=asc&apikey=PKSVMJ95S7ZA63NGM5KM6K7FT1N3J737RH
+
+
+#查询接收方的所有订单(可限定查询的区块范围)
+http://api.etherscan.io/api?module=account&action=txlist&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&startblock=0&endblock=99999999&sort=asc&apikey=PKSVMJ95S7ZA63NGM5KM6K7FT1N3J737RH
+
+http://api.etherscan.io/api?module=account&action=txlist&address=0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae&startblock=5000000&endblock=99999999&sort=asc&apikey=PKSVMJ95S7ZA63NGM5KM6K7FT1N3J737RH
+
 ```
