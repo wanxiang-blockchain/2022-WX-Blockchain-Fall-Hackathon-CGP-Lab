@@ -96,7 +96,22 @@ curl -F 'file=@/mnt/d/Downloads/newnew/icon.jpg' http://127.0.0.1:17171/mint
 {"code":100,"msg":"铸造成功"}
 ```
 
+### CGP-SBT合约
+当能累计信誉的加分项满足一定的条件后,将会在链上触发event事件,CGP后端服务将会使用NFT中间件为其铸造一枚SBT(无法转移的NFT)
+
+```bash
+function _beforeTokenTransfer(
+    address from, 
+    address to, 
+    uint256 tokenId
+    ) internal override virtual {
+    require(from == address(0), "Err: token transfer is BLOCKED"); 
+    super._beforeTokenTransfer(from, to, tokenId);  
+    }
+```
+
 ## tool_etherscan 以太坊区块扫描器
+> https://etherscan.io/myapikey
 
 ```bash
 #*Api-Key Token*
