@@ -6,7 +6,7 @@
 .
 ├── cgp               # 前端,生成同态密文的公私钥与加解密
 ├── py-etherscan-api  # 以太坊区块扫描器(连接 etherscan.io 的api)
-└── Web3.CGP          # 后端服务,其中的NFT铸造中间件用到了ipfs的nft.storage
+└── Web3.CGP          # 后端服务,包括api,合约,NFT铸造中间件(用到了ipfs的nft.storage)
 ```
 
 ## cgp - 前端密文计算的用法
@@ -41,6 +41,23 @@ heManager.heDecryption(cipher, seckey, pubkey).then(plain => {
 ```
 
 ## Web3.CGP - CGP的后端服务
+
+### 密文图谱合约
+`Web3.CGP/contracts/cgp.sol`
+
+```js
+/** 向某一用户添加密文信誉值
+* @param did 用户did
+* @param cipher 增加用户信誉值密文
+* @param pubKey 同态计算的公钥
+* @param _type 信誉值增加的类别
+*/
+function addCredit(string memory did, string memory cipher, string memory pubKey, CredictTypes _type) public returns (string memory, int)
+
+/** 验证权威机构开具的零知识证明
+*/
+function verifyProof(string memory proof, string memory pid) public returns (bool)
+```
 
 ### NFT铸造中间件
 
