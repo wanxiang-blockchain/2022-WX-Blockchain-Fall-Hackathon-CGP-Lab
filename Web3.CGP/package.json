@@ -37,9 +37,10 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
-    "nft.storage": "^6.4.1",
+    "mime": "^3.0.0",
     "moment": "^2.22.2",
     "multer": "^1.4.1",
+    "nft.storage": "^6.4.1",
     "thunkify": "^2.1.2"
   },
   "directories": {

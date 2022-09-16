@@ -10,12 +10,16 @@ function MakeStorageClient() {
   return new NFTStorage.NFTStorage({ token: GetAccessToken() });
 }
 
-async function StoreContent(files) {
+async function StoreContent(image, name, description) {
   console.log("Uploading files to IPFS with nft.storage....");
   const client = MakeStorageClient();
-  const cid = await client.put(files);
-  console.log("Stored files with cid:", cid);
-  return cid;
+  const result = await client.store({
+    image,
+    name,
+    description,
+  });
+  console.log("Stored files with result:", result);
+  return result;
 }
 
 module.exports = {

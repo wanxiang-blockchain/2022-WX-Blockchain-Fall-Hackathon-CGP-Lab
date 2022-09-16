@@ -23,5 +23,5 @@ curl http://localhost:17171
 ### 上传文件
 
 ```bash
-curl -F 'file=@/home/wcc/my/blockchain/hackathon/2022-WX-Blockchain-Fall-Hackathon-CGP-Lab/Web3.CGP/app.js' http://127.0.0.1:17171/upload
+curl -F 'file=@/mnt/d/Downloads/newnew/icon.jpg' http://127.0.0.1:17171/upload
 ```
